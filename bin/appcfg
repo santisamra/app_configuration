@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+require 'app_configuration'
+require 'thor'
+require 'thor/group'
+require 'pry'
+require 'pry-nav'
+require 'pry-stack_explorer'
+
+module AppConfigurationCLI
+
+	class Setup < Thor
+		desc "heroku <config> [-a application]", "Searches an .config.yml or ENV variables prefixed with CONFIG_ and sets configuration to heroku"
+		
+		option :a, banner: "<application>"
+		def heroku(config)
+			# AppConfiguration.for
+			puts "Variables:"
+			puts config
+			puts options[:a].to_s if options[:a]
+
+			configs = AppConfiguration.for(config.to_sym)
+			binding.pry
+		end
+	end
+
+	class Appcfg < Thor
+		desc "setup SERVICE [SERVICE OPTS]", "Configure custom variables to a service"
+		subcommand "setup", Setup
+	end
+
+end
+
+
+AppConfigurationCLI::Appcfg.start(ARGV)

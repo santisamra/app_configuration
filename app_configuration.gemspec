@@ -14,6 +14,10 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "rake"
+  gem.add_runtime_dependency "thor", '~> 0.18.1'
+  gem.add_runtime_dependency 'pry'
+  gem.add_runtime_dependency 'pry-nav'
+  gem.add_runtime_dependency 'pry-stack_explorer'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

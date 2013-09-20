@@ -67,6 +67,10 @@ module AppConfiguration
         @config
       end
 
+      def config_from_env
+        ENV.select { |e| e.start_with? "#{@prefix.upcase}_"} if @prefix
+      end
+
       def config_path(base_path)
         File.expand_path(File.join(base_path, @config_file_name))
       end
